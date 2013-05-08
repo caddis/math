@@ -132,7 +132,7 @@ class Math {
 
 	function usage()
 	{
-		ob_start(); 
+		ob_start();
 ?>
 Parameters:
 
@@ -155,7 +155,7 @@ Usage:
 <?php
 		$buffer = ob_get_contents();
 
-		ob_end_clean(); 
+		ob_end_clean();
 
 		return $buffer;
 	}
