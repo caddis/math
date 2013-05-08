@@ -2,7 +2,7 @@
 
 $plugin_info = array (
 	'pi_name' => 'Math',
-	'pi_version' => '1.2.0',
+	'pi_version' => '1.3.0',
 	'pi_author' => 'Michael Leigeber',
 	'pi_author_url' => 'http://www.caddis.co',
 	'pi_description' => 'Use Math to execute PHP supported math formulas.',
