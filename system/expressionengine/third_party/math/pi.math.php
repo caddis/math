@@ -9,8 +9,8 @@ $plugin_info = array (
 	'pi_usage' => Math::usage()
 );
 
-class Math
-{
+class Math {
+
 	public $return_data = '';
 
 	function __construct()
@@ -22,46 +22,46 @@ class Math
 
 		$error = false;
 		$result = '';
-		
+
 		if ($formula)
 		{
 			// Convert html entities to math characters
 			$formula = html_entity_decode($formula);
-			
+
 			// Replace parameters
 			$params = $this->EE->TMPL->fetch_param('params');
 			$numeric_error = $this->EE->TMPL->fetch_param('numeric_error', 'Invalid input');
-			
+
 			if ($params)
 			{
 				$params = explode('|', $params);
 				$i = 1;
-				
-				foreach($params as $param)
+
+				foreach ($params as $param)
 				{
-					if (!is_numeric($param))
+					if (! is_numeric($param))
 					{
 						$param = preg_replace('/\D/', '', $param);
 
-						if (!is_numeric($param))
+						if (! is_numeric($param))
 						{
 							$this->return_data = $numeric_error;
 
 							return;
 						}
 					}
-					
+
 					$formula = str_replace('[' . $i . ']', $param, $formula);
-					
+
 					$i++;
 				}
 			}
-			
-			if (!$error)
+
+			if (! $error)
 			{
 				// Evaluate math
 				@eval("\$result = $formula;");
-				
+
 				// Get settings
 				$round = $this->EE->TMPL->fetch_param('round', false);
 				$decimals = $this->EE->TMPL->fetch_param('decimals', false);
@@ -126,7 +126,7 @@ class Math
 				}
 			}
 		}
-		
+
 		$this->return_data = $result;
 	}
 
@@ -154,7 +154,7 @@ Usage:
 {exp:math formula="2/3" decimals="2" round="up"} outputs 0.67
 <?php
 		$buffer = ob_get_contents();
-	
+
 		ob_end_clean(); 
 
 		return $buffer;
