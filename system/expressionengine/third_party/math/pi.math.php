@@ -13,7 +13,7 @@ class Math {
 
 	public $return_data = '';
 
-	function __construct()
+	public function __construct()
 	{
 		$this->EE =& get_instance();
 
