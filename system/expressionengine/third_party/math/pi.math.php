@@ -2,7 +2,7 @@
 
 $plugin_info = array (
 	'pi_name' => 'Math',
-	'pi_version' => '1.3.0',
+	'pi_version' => '1.3.1',
 	'pi_author' => 'Michael Leigeber',
 	'pi_author_url' => 'http://www.caddis.co',
 	'pi_description' => 'Use Math to execute PHP supported math formulas.',
@@ -79,14 +79,15 @@ class Math {
 				}
 
 				// Rounding
-				if ($decimals !== false)
+				if ($decimals !== false || $round !== false)
 				{
-					$mult = pow(10, $decimals);
+					$dec = ($decimals !== false) ? $decimals : 0;
+					$mult = pow(10, $dec);
 
 					switch ($round)
 					{
 						case 'up':
-							$result = round($result, $decimals, PHP_ROUND_HALF_UP);
+							$result = round($result, $dec, PHP_ROUND_HALF_UP);
 							break;
 						case 'ceil':
 	   						$result = ceil($result * $mult) / $mult;
@@ -130,7 +131,7 @@ class Math {
 		$this->return_data = $result;
 	}
 
-	function usage()
+	public static function usage()
 	{
 		ob_start();
 ?>
