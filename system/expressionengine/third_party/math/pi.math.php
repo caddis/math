@@ -1,9 +1,9 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
 
 $plugin_info = array (
 	'pi_name' => 'Math',
-	'pi_version' => '1.3.1',
-	'pi_author' => 'Michael Leigeber',
+	'pi_version' => '1.4.0',
+	'pi_author' => 'Caddis',
 	'pi_author_url' => 'http://www.caddis.co',
 	'pi_description' => 'Use Math to execute PHP supported math formulas.',
 	'pi_usage' => Math::usage()
@@ -15,24 +15,22 @@ class Math {
 
 	public function __construct()
 	{
-		$this->EE =& get_instance();
-
 		// Get formula
-		$formula = $this->EE->TMPL->fetch_param('formula');
+		$formula = ee()->TMPL->fetch_param('formula');
 
 		$error = false;
 		$result = '';
 
-		if ($formula)
+		if ($formula !== false)
 		{
 			// Convert html entities to math characters
 			$formula = html_entity_decode($formula);
 
 			// Replace parameters
-			$params = $this->EE->TMPL->fetch_param('params');
-			$numeric_error = $this->EE->TMPL->fetch_param('numeric_error', 'Invalid input');
+			$params = ee()->TMPL->fetch_param('params');
+			$numeric_error = ee()->TMPL->fetch_param('numeric_error', 'Invalid input');
 
-			if ($params)
+			if ($params !== false)
 			{
 				$params = explode('|', $params);
 				$i = 1;
@@ -57,18 +55,18 @@ class Math {
 				}
 			}
 
-			if (! $error)
+			if ($error !== true)
 			{
 				// Evaluate math
 				@eval("\$result = $formula;");
 
 				// Get settings
-				$round = $this->EE->TMPL->fetch_param('round', false);
-				$decimals = $this->EE->TMPL->fetch_param('decimals', false);
-				$decimal_point = $this->EE->TMPL->fetch_param('dec_point', '.');
-				$thousands_seperator = $this->EE->TMPL->fetch_param('thousands_seperator', ',');
-				$absolute = $this->EE->TMPL->fetch_param('absolute');
-				$trailing_zeros = $this->EE->TMPL->fetch_param('trailing_zeros', false);
+				$round = ee()->TMPL->fetch_param('round');
+				$decimals = ee()->TMPL->fetch_param('decimals');
+				$decimal_point = ee()->TMPL->fetch_param('dec_point', '.');
+				$thousands_seperator = ee()->TMPL->fetch_param('thousands_seperator', ',');
+				$absolute = ee()->TMPL->fetch_param('absolute');
+				$trailing_zeros = ee()->TMPL->fetch_param('trailing_zeros');
 
 				$decimal_digits = 0;
 
@@ -79,7 +77,7 @@ class Math {
 				}
 
 				// Rounding
-				if ($decimals !== false || $round !== false)
+				if ($decimals !== false or $round !== false)
 				{
 					$dec = ($decimals !== false) ? $decimals : 0;
 					$mult = pow(10, $dec);
@@ -105,17 +103,17 @@ class Math {
 				// Format response
 				if ($decimals !== false)
 				{
-					$result = number_format((int)$parts[0], 0, $decimal_point, $thousands_seperator);
+					$result = number_format((int) $parts[0], 0, $decimal_point, $thousands_seperator);
 
 					if ($decimals > 0) 
 					{
-						if ($decimal_digits < $decimals && $trailing_zeros)
+						if ($decimal_digits < $decimals and $trailing_zeros)
 						{
 							$result .= '.' . str_pad($decimal_value, $decimals, 0);
 						}
 						else
 						{
-							$result .= $decimal_value ? '.' . $decimal_value : '';
+							$result .= $decimal_value ? ('.' . $decimal_value) : '';
 						}
 					}
 				}
@@ -123,7 +121,7 @@ class Math {
 				{
 					$decimals = $decimal_digits;
 
-					$result = number_format((float)$result, $decimals, $decimal_point, $thousands_seperator);
+					$result = number_format((float) $result, $decimals, $decimal_point, $thousands_seperator);
 				}
 			}
 		}
@@ -137,15 +135,15 @@ class Math {
 ?>
 Parameters:
 
-formula = '(5 * 2) / [1]'		// math formula (required) supports the following operators as well as bitwise + - * / % ++ -- < > <= => != <> ==
-params = '{var}|{var2}'		// pipe delimited list of numeric parameters to be replaced into formula, recommended due to use of PHP eval (default: null)
-decimals = '2' 					// sets the number of decimal points (default: "0")
-decimal_point = '.' 				// sets the separator for the decimal point (default: ".")
-thousands_seperator = ','		// sets the thousands separator; (default: ",")
-absolute = 'yes'					// return the absolute number of the result (defaults: "no")
-round = 'up|down|ceil'				// whether to round the result up or down, where up is standard rounding (defaults: no rounding)
-numeric_error = 'Error'			// message returned when non-numeric parameters are provided (default: "Invalid input")
-trailing_zeros = 'yes'			// include trailing 0 decimal places (defaults: "no")
+formula = '(5 * 2) / [1]'  // math formula (required) supports the following operators as well as bitwise + - * / % ++ -- < > <= => != <> ==
+params = '{var}|{var2}'    // pipe delimited list of numeric parameters to be replaced into formula, recommended due to use of PHP eval (default: null)
+decimals = '2'             // sets the number of decimal points (default: "0")
+decimal_point = '.'        // sets the separator for the decimal point (default: ".")
+thousands_seperator = ','  // sets the thousands separator; (default: ",")
+absolute = 'yes'           // return the absolute number of the result (defaults: "no")
+round = 'up|down|ceil'     // whether to round the result up or down, where up is standard rounding (defaults: no rounding)
+numeric_error = 'Error'    // message returned when non-numeric parameters are provided (default: "Invalid input")
+trailing_zeros = 'yes'     // include trailing 0 decimal places (defaults: "no")
 
 Usage:
 

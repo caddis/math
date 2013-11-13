@@ -1,4 +1,4 @@
-ExpressionEngine Math Plugin 1.3.1
+ExpressionEngine Math Plugin 1.4.0
 ====
 
 Use Math to execute PHP supported math formulas in ExpressionEngine.
