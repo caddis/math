@@ -1,4 +1,4 @@
-## Math 1.4.0
+## Math 1.4.1
 
 Math allows you to execute many PHP math functions in your ExpressionEngine templates without needing to enable PHP parsing.
 

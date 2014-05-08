@@ -1,3 +1,9 @@
+# 1.4.1
+
+2013-05-08
+
+- FIX: Resolved issue where periods could be removed when parsing strings
+
 # 1.4.0
 
 2013-11-13

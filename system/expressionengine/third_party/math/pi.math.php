@@ -2,7 +2,7 @@
 
 $plugin_info = array (
 	'pi_name' => 'Math',
-	'pi_version' => '1.4.0',
+	'pi_version' => '1.4.1',
 	'pi_author' => 'Caddis',
 	'pi_author_url' => 'http://www.caddis.co',
 	'pi_description' => 'Use Math to execute PHP supported math formulas.',
@@ -21,8 +21,7 @@ class Math {
 		$error = false;
 		$result = '';
 
-		if ($formula !== false)
-		{
+		if ($formula !== false) {
 			// Convert html entities to math characters
 			$formula = html_entity_decode($formula);
 
@@ -30,19 +29,15 @@ class Math {
 			$params = ee()->TMPL->fetch_param('params');
 			$numeric_error = ee()->TMPL->fetch_param('numeric_error', 'Invalid input');
 
-			if ($params !== false)
-			{
+			if ($params !== false) {
 				$params = explode('|', $params);
 				$i = 1;
 
-				foreach ($params as $param)
-				{
-					if (! is_numeric($param))
-					{
-						$param = preg_replace('/\D/', '', $param);
+				foreach ($params as $param) {
+					if (! is_numeric($param)) {
+						$param = preg_replace('/[^0-9.]*/', '', $param);
 
-						if (! is_numeric($param))
-						{
+						if (! is_numeric($param)) {
 							$this->return_data = $numeric_error;
 
 							return;
@@ -55,8 +50,7 @@ class Math {
 				}
 			}
 
-			if ($error !== true)
-			{
+			if ($error !== true) {
 				// Evaluate math
 				@eval("\$result = $formula;");
 
@@ -71,19 +65,16 @@ class Math {
 				$decimal_digits = 0;
 
 				// Absolute value
-				if ($absolute)
-				{
+				if ($absolute) {
 					$result = abs($result);
 				}
 
 				// Rounding
-				if ($decimals !== false or $round !== false)
-				{
+				if ($decimals !== false or $round !== false) {
 					$dec = ($decimals !== false) ? $decimals : 0;
 					$mult = pow(10, $dec);
 
-					switch ($round)
-					{
+					switch ($round) {
 						case 'up':
 							$result = round($result, $dec, PHP_ROUND_HALF_UP);
 							break;
@@ -97,28 +88,21 @@ class Math {
 
 				$parts = explode('.', $result);
 
-				$decimal_value = count($parts) > 1 ? $parts[1] : false;
+				$decimal_value = (count($parts) > 1) ? $parts[1] : false;
 				$decimal_digits = strlen($decimal_value);
 
 				// Format response
-				if ($decimals !== false)
-				{
+				if ($decimals !== false) {
 					$result = number_format((int) $parts[0], 0, $decimal_point, $thousands_seperator);
 
-					if ($decimals > 0) 
-					{
-						if ($decimal_digits < $decimals and $trailing_zeros)
-						{
+					if ($decimals > 0) {
+						if ($decimal_digits < $decimals and $trailing_zeros) {
 							$result .= '.' . str_pad($decimal_value, $decimals, 0);
-						}
-						else
-						{
+						} else {
 							$result .= $decimal_value ? ('.' . $decimal_value) : '';
 						}
 					}
-				}
-				else
-				{
+				} else {
 					$decimals = $decimal_digits;
 
 					$result = number_format((float) $result, $decimals, $decimal_point, $thousands_seperator);
@@ -135,15 +119,15 @@ class Math {
 ?>
 Parameters:
 
-formula = '(5 * 2) / [1]'  // math formula (required) supports the following operators as well as bitwise + - * / % ++ -- < > <= => != <> ==
-params = '{var}|{var2}'    // pipe delimited list of numeric parameters to be replaced into formula, recommended due to use of PHP eval (default: null)
-decimals = '2'             // sets the number of decimal points (default: "0")
-decimal_point = '.'        // sets the separator for the decimal point (default: ".")
-thousands_seperator = ','  // sets the thousands separator; (default: ",")
-absolute = 'yes'           // return the absolute number of the result (defaults: "no")
-round = 'up|down|ceil'     // whether to round the result up or down, where up is standard rounding (defaults: no rounding)
-numeric_error = 'Error'    // message returned when non-numeric parameters are provided (default: "Invalid input")
-trailing_zeros = 'yes'     // include trailing 0 decimal places (defaults: "no")
+formula = '(5 * 2) / [1]' // math formula (required) supports the following operators as well as bitwise + - * / % ++ -- < > <= => != <> ==
+params = '{var}|{var2}'   // pipe delimited list of numeric parameters to be replaced into formula, recommended due to use of PHP eval (default: null)
+decimals = '2'            // sets the number of decimal points (default: "0")
+decimal_point = '.'       // sets the separator for the decimal point (default: ".")
+thousands_seperator = ',' // sets the thousands separator; (default: ",")
+absolute = 'yes'          // return the absolute number of the result (defaults: "no")
+round = 'up|down|ceil'    // whether to round the result up or down, where up is standard rounding (defaults: no rounding)
+numeric_error = 'Error'   // message returned when non-numeric parameters are provided (default: "Invalid input")
+trailing_zeros = 'yes'    // include trailing 0 decimal places (defaults: "no")
 
 Usage:
 
