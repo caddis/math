@@ -93,15 +93,19 @@ class Math {
 
 				// Format response
 				if ($decimals !== false) {
-					$result = number_format((int) $parts[0], 0, $decimal_point, $thousands_seperator);
+
+					$parts[0] = (int) $parts[0];
 
 					if ($decimals > 0) {
 						if ($decimal_digits < $decimals and $trailing_zeros) {
-							$result .= '.' . str_pad($decimal_value, $decimals, 0);
+							$parts[0] .= '.' . str_pad($decimal_value, $decimals, 0);
 						} else {
-							$result .= $decimal_value ? ('.' . $decimal_value) : '';
+							$parts[0] .= $decimal_value ? ('.' . $decimal_value) : '';
 						}
 					}
+
+					$result = number_format($parts[0], 0, $decimal_point, $thousands_seperator);
+
 				} else {
 					$decimals = $decimal_digits;
 
