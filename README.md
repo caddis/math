@@ -1,4 +1,4 @@
-## Math 1.4.1
+## Math 1.5.0
 
 Math allows you to execute many PHP math functions in your ExpressionEngine templates without needing to enable PHP parsing.
 
@@ -89,6 +89,18 @@ Message returned when non-numeric parameters are provided (default: "Invalid inp
 ### trailing_zeros="yes"
 
 Include trailing 0 decimal places (defaults: "no")
+
+## Installation
+
+### EE 2
+
+DevDemon Updater is fully supported, or for manual installs, copy `system/expressionengine/third_party/math` to your third_party system directory.
+
+### EE 3
+
+1. Copy `system/expressionengine/third_party/math` to `system/user/addons`
+2. Go to your control panel and navigate to the Add-On Manager
+3. Locate Math in the Third Part Add-Ons section and click install
 
 ## License
 
