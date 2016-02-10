@@ -6,7 +6,7 @@ if (! defined('MATH_AUTHOR')) {
 	define('MATH_DESC', 'Use Math to execute PHP supported math formulas.');
 	define('MATH_DOCS_URL', 'https://github.com/caddis/math');
 	define('MATH_NAME', 'Math');
-	define('MATH_VER', '1.5.0');
+	define('MATH_VER', '1.5.1');
 }
 
 return array(
@@ -15,6 +15,6 @@ return array(
 	'description' => MATH_DESC,
 	'docs_url' => MATH_DOCS_URL,
 	'name' => MATH_NAME,
-	'namespace' => 'Caddis\Resizer',
+	'namespace' => 'Caddis\Math',
 	'version' => MATH_VER
 );

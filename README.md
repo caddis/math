@@ -1,18 +1,20 @@
-## Math 1.5.0
+## Math 1.5.1
 
 Math allows you to execute many PHP math functions in your ExpressionEngine templates without needing to enable PHP parsing.
 
 ## Quick Tag Reference (full documentation below)
 
-	formula="(5 * 2) / [1]" — math formula (required) supports the following operators as well as bitwise + - * / % ++ -- < > <= => != <> ==
-	params="{var}|{var2}" — pipe delimited list of numeric parameters to be replaced into formula, recommended due to use of PHP eval (default: null)
-	decimals="2" — sets the number of decimal points (default: "0")
-	decimal_point="." — sets the separator for the decimal point (default: ".")
-	thousands_seperator="," — sets the thousands separator; (default: ",")
-	absolute="yes" — return the absolute number of the result (defaults: "no")
-	round="up|down|ceil" — whether to round the result up or down (defaults: no rounding)
-	numeric_error="Error" — message returned when non-numeric parameters are provided (default: "Invalid input")
-	trailing_zeros="yes" — include trailing 0 decimal places (defaults: "no")
+```
+formula="(5 * 2) / [1]" — math formula (required) supports the following operators as well as bitwise + - * / % ++ -- < > <= => != <> ==
+params="{var}|{var2}" — pipe delimited list of numeric parameters to be replaced into formula, recommended due to use of PHP eval (default: null)
+decimals="2" — sets the number of decimal points (default: "0")
+dec_point="." — sets the separator for the decimal point (default: ".")
+thousands_seperator="," — sets the thousands separator; (default: ",")
+absolute="yes" — return the absolute number of the result (defaults: "no")
+round="up|down|ceil" — whether to round the result up or down (defaults: no rounding)
+numeric_error="Error" — message returned when non-numeric parameters are provided (default: "Invalid input")
+trailing_zeros="yes" — include trailing 0 decimal places (defaults: "no")
+```
 
 ## Parameters
 
@@ -32,9 +34,9 @@ Output: 8
 
 ### params="{var}|{var2}"
 
-This is a pipe delimited list of numeric parameters to be replaced into formula, recommended when using dynamic parameters (default: null).
+This is a pipe-delimited list of numeric parameters to be replaced into the formula, recommendeded when using dynamic parameters (default: null).
 
-Set your params and call them by bracketed number in order of listing. So for instance [1] would call the first set param, [2] would call the second set param and so forth.
+Set your parameters and call them by bracketed number reference. For instance [1] would call the first value, [2] would call the second value, and so forth.
 
 Example:
 
@@ -50,7 +52,7 @@ Example:
 
 Output: 2.4
 
-### decimal_point="."
+### dec_point="."
 
 Sets the separator for the decimal point (default: ".")
 
@@ -94,26 +96,15 @@ Include trailing 0 decimal places (defaults: "no")
 
 ### EE 2
 
-DevDemon Updater is fully supported, or for manual installs, copy `system/expressionengine/third_party/math` to your third_party system directory.
+DevDemon Updater is fully supported, or for manual installs copy "system/expressionengine/third_party/math" to your third_party system directory.
 
 ### EE 3
 
-1. Copy `system/expressionengine/third_party/math` to `system/user/addons`
+1. Copy "system/expressionengine/third_party/math" to "system/user/addons"
 2. Go to your control panel and navigate to the Add-On Manager
-3. Locate Math in the Third Part Add-Ons section and click install
+3. Locate Math in the Third Party Add-Ons section and click install
+
 
 ## License
 
-Copyright 2014 Caddis Interactive, LLC
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-	http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+Copyright 2016 [Caddis Interactive, LLC](https://www.caddis.co). Licensed under the [Apache License, Version 2.0](https://github.com/caddis/math/blob/master/LICENSE).
