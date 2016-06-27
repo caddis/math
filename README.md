@@ -9,7 +9,7 @@ formula="(5 * 2) / [1]" — math formula (required) supports the following opera
 params="{var}|{var2}" — pipe delimited list of numeric parameters to be replaced into formula, recommended due to use of PHP eval (default: null)
 decimals="2" — sets the number of decimal points (default: "0")
 dec_point="." — sets the separator for the decimal point (default: ".")
-thousands_seperator="," — sets the thousands separator; (default: ",")
+thousands_separator="," — sets the thousands separator; (default: ",")
 absolute="yes" — return the absolute number of the result (defaults: "no")
 round="up|down|ceil" — whether to round the result up or down (defaults: no rounding)
 numeric_error="Error" — message returned when non-numeric parameters are provided (default: "Invalid input")
@@ -56,7 +56,7 @@ Output: 2.4
 
 Sets the separator for the decimal point (default: ".")
 
-### thousands_seperator=","
+### thousands_separator=","
 
 Sets the thousands separator (default: ",")
 
