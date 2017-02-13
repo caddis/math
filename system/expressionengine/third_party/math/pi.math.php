@@ -94,9 +94,9 @@ class Math
 
 					if ($decimals > 0) {
 						if ($decimalDigits < $decimals && $trailingZeros) {
-							$result .= '.' . str_pad($decimalValue, $decimals, 0);
+							$result .= $decimalPoint . str_pad($decimalValue, $decimals, 0);
 						} else {
-							$result .= $decimalValue ? ('.' . $decimalValue) : '';
+							$result .= $decimalValue ? ($decimalPoint . $decimalValue) : '';
 						}
 					}
 				} else {
